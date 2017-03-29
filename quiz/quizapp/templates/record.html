@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %} Quiz Records {% endblock %}
+
+
+{% block content %}
+  <br><br>
+	<div id="main"  style="height:400px;margin-top:1000px; "  class='w3-container w3-margin-top'></div>
+
+
+
+
+
+
+	<ul>
+
+	{% for obj in obj_list %}
+
+		<li>  {{ obj.pub_date|date:"Y-m-d"}} {{ obj.get_time }}<br/>
+		<b>Score：</b><span class='w3-green'>{{ obj.fenshu }} </span><br/>
+		{%  if obj.fenshu == 100  %}
+		{% else %}
+		<b>Wrong Questions ：</b>
+		{% endif %}
+		<div class="w-list">
+		<ol>
+		{% for w in obj.wrong_question.all %}
+		    <li><a href="/q/{{ w.id }}">{{ w.question_text }}</a></li>
+		{% endfor %}
+		</ol>
+		</div>
+		<hr/>
+	   </li>
+
+	{% endfor %}
+	</ul>
+
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+				var option = {
+						title : {
+								text: 'Your Quiz Record',
+								subtext: ''
+						},
+						tooltip : {
+								trigger: 'axis'
+						},
+						legend: {
+								data:['您的成绩','班级平均成绩']
+						},
+						toolbox: {
+								show : true,
+								feature : {
+										mark : {show: true},
+										dataView : {show: true, readOnly: false},
+										magicType : {show: true, type: ['line', 'bar']},
+										restore : {show: true},
+										saveAsImage : {show: true}
+								}
+						},
+						calculable : true,
+						xAxis : [
+								{
+										type : 'category',
+										boundaryGap : false,
+
+										data : {{xzhou_list|safe}}
+								}
+						],
+						yAxis : [
+								{
+										type : 'value',
+										axisLabel : {
+												formatter: '{value}'
+										}
+								}
+						],
+						series : [
+								{
+										name:'您的成绩',
+										type:'line',
+										data:{{fenshu_list}},
+										markPoint : {
+												data : [
+														{type : 'max', name: 'Max Record'},
+														{type : 'min', name: 'Min Record'}
+												]
+										},
+										markLine : {
+												data : [
+														{type : 'average', name: 'Average Record'}
+												]
+										}
+								},
+								{
+										name:'班级平均成绩',
+										type:'line',
+										data:{{fenshu_list}},
+										markPoint : {
+												data : [
+														{type : 'max', name: 'Max Record'},
+														{type : 'min', name: 'Min Record'}
+												]
+										},
+										markLine : {
+												data : [
+														{type : 'average', name : 'Average Record'}
+												]
+										}
+								}
+						]
+				};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+{% endblock %}

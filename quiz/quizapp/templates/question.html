@@ -1,0 +1,38 @@
+<div class="w3-border w3-green">
+  <span class="w3-badge w3-left">{{obj.get_leixing_display  }}</span>
+  {{ obj }}
+
+</div>
+<br/>
+{% for answer in obj.answer_set.all %}
+{% if obj.leixing == 1 %}
+<input type="radio" name="{{ obj.id }}" value="{{ answer.id }}">
+{% else %}
+<input type="checkbox" name="{{ obj.id }}" value="{{ answer.id }}">
+{% endif %}
+<span class="w3-amber  w3-hover-brown">
+  {{ answer }}
+</span>
+<br/>
+{% endfor %}
+
+
+
+
+{% comment %}
+<div class="w3-border w3-green">
+  {{ obj }}
+</div>
+<br/>
+{% for answer in obj.answer_set.all %}
+{% if obj.leixing == 1 %}
+<input type="radio" name="{{ obj.id }}" value="{{ answer.id }}">
+{% else %}
+<input type="checkbox" name="{{ obj.id }}" value="{{ answer.id }}">
+{% endif %}
+<span class="w3-amber  w3-hover-brown">
+  {{ answer }}
+</span>
+<br/>
+{% endfor %}
+{% endcomment %}

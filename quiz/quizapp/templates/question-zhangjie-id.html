@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+This is practice page
+{% endblock %}
+
+{% block content %}
+<div class="w3-container w3-black" >
+
+        <br><br><br><br><br>
+
+        <h2>List as Question per ZhangJie </h2>
+        <ul class="w3-ul w3-card-4 w3-border w3-green">
+          {% for question in question_list_by_zhangjie  %}
+            <span class="w3-badge w3-left">{{question.get_leixing_display  }}</span><br>
+            <li><a href="{% url 'show_question_by_id'  question.id  %}"  class=" w3-text-black">{{question.id}}{{question.question_text}}</a>  <br></li>
+
+          {% endfor %}
+        </ul>
+
+</div>
+
+{%  endblock %}

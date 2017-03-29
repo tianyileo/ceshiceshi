@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}  Come to Quiz {% endblock %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+
+{% if isCreated %}
+<h2>Come to quiz</h2>
+
+<div class="w3-container w3-panel-8">
+	<form action="/quiz/" method="post"> {% csrf_token %}
+		<ol>
+		{% for obj in obj_list %}
+			<li>{% include "question.html" %}</li>
+		{% endfor %}
+		</ol>
+		<input type="submit" value="答完了,交卷！">
+	</form>
+</div>
+{% else %}
+<div class="w3-blue" >
+<form action="." method="post"> {% csrf_token %}
+<label for="zhangjie" class="w3-red"> 章节 &nbsp;&nbsp; </label>
+		<select name="zhangjie" class="w3-red">
+			<option value="1" >Cultural Diversity</option>
+			<option value="2">End-of-Life Care</option>
+			<option value="3">Ethical/Legal</option>
+			<option value="4">Delegating/Prioritizing</option>
+			<option value="5">Fluids & electrolytes/Acid-Base</option>
+			<option value="6">Laboratory Values</option>
+			<option value="7">Nutrition</option>
+			<option value="8">Medications/Blood & IV Therapy</option>
+			<option value="9">Safety/Infection Control</option>
+			<option value="10">Perioperative Care</option>
+			<option value="11">Critical Care</option>
+			<option value="12">Maternity: Antepartum</option>
+			<option value="13">Maternity: Intrapartum</option>
+			<option value="14">Maternity: Postpartum</option>
+			<option value="15">Fundamental Skills: Developmental Stages</option>
+			<option value="16">Child Health: Neurological/Musculoskeletal</option>
+			<option value="17">Child Health: Eye/Ear/Throat/Respiratory/Cardiovas</option>
+			<option value="18">Child Health: Gastrointestinal/Renal</option>
+			<option value="19">Child Health: Metabolic/Endocrine</option>
+			<option value="20">Child Health: Hematological/Oncological</option>
+			<option value="21">Child Health: Integumentary/AIDS/Infectious Disea</option>
+			<option value="22">Adult Health: Health Assessment/Physical Exam</option>
+			<option value="23">Adult Health: Integumentary</option>
+			<option value="24">Adult Health: Oncology</option>
+			<option value="25">Adult Health: Endocrine</option>
+			<option value="26">Adult Health: Gastrointestinal</option>
+			<option value="27">Adult Health: Respiratory</option>
+			<option value="28">Adult Health: Cardiovascular</option>
+			<option value="29">Adult Health: Renal</option>
+			<option value="30">Adult Health: Eye</option>
+			<option value="31">Adult Health: Ear</option>
+			<option value="32">Adult Health: Neurological</option>
+			<option value="33">Adult Health: Musculoskeletal</option>
+			<option value="34">Adult Health: Immune</option>
+			<option value="35">Mental Health</option>
+			<option value="36">Pharmacology</option>
+
+		</select>
+	<br/><br/>
+	<label for="q_num" class="w3-black"> 数量 &nbsp;&nbsp; </label>
+	<input type="text" name="q_num" value="" class="w3-black" placeholder="输入一个0到100的数字" >
+
+
+		<br/> <br/> <br/>
+	<input type="submit" value="开始制作试卷" class="w3-khaki"/ >
+</form>
+</div>
+{% endif %}
+{% endblock %}

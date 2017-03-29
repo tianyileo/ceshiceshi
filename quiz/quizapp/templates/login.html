@@ -1,0 +1,61 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="{% static 'css\semantic.css' %}" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css\login.css' %}" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <form class="bg" action="{% url 'login' %}" method="post">
+      <div class="ui image logo">
+        <img src="{% static 'images/bg-logo.png' %}" alt="" />
+      </div>
+
+      <div class="ui  two item text  menu">
+          <a class="item" href="{% url 'register' %}">
+            <span>
+              <p class="outset" style="border-bottom:2px solid rgb(247, 250, 252);">注册</p>
+            </span>
+          </a>
+          <a class="active item" href="#list/editors">
+            <span>
+              <p class="outset" style="border-bottom:2px solid #2185D0;">登录</p>
+            </span>
+          </a>
+      </div>
+      <div class="ui vertical menu">
+        <div class="item">
+            <div class="ui transparent input">
+              <input type="name" placeholder="姓名" value="" name="name">
+            </div>
+        </div>
+        <div class="item">
+            <div class="ui transparent input">
+              <input type="email" placeholder="邮箱" value="" name="email">
+            </div>
+        </div>
+        <div class="item">
+          <div class="ui transparent input">
+            <input type="password" placeholder="密码（不少于6位）" name="password">
+          </div>
+        </div>
+      </div>
+
+      {% csrf_token %}
+      <button class="ui blue button">登录</button>
+      <div class="ui text menu">
+        <div class="meun">
+          <div class="ui checkbox">
+            <input type="checkbox" checked name="remember">
+            <label>记住我</label>
+          </div>
+        </div>
+        <div class="right menu">
+          忘记密码？
+         </div>
+      </div>
+    </form>
+  </body>
+</html>

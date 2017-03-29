@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}
+This is practice page
+{% endblock %}
+
+
+
+
+{% comment %}
+{% block content %}
+{% verbatim %}
+<div class="w3-container w3-black"  id='app' >
+  <h2>List Demo</h2>
+        <hr/>
+        {{message}}
+        <h3>List as Card</h3>
+        <ul class="w3-ul w3-card-4 ">
+          {% for zhangjie  in zhangjie_list %}
+           <li class=""><a href="#" class="w3-text-pink w3-animate-right">{{zhangjie.zhangjie_title}}</a><span class="w3-right w3-badge w3-green w3-animate-left ">{{zhangjie.question_set.count}}</span></li>
+          {% endfor %}
+        </ul>
+</div>
+
+<script type="text/javascript">
+      new Vue({
+        el : '#app',
+        data : {
+          message : 'hello, vue！'
+        }
+      })
+
+</script>
+
+{% endverbatim %}
+{%  endblock %}
+
+
+
+{% endcomment %}
+
+
+
+{% block content %}
+<div class="w3-container w3-black" >
+
+        <br><br><br><br><br>
+
+        <h3>List as ZhangJie</h3>
+        <ul class="w3-ul w3-card-4 ">
+          {% for zhangjie  in zhangjie_list %}
+           <li class=""><a href="{%  url  'show_question_by_zhangjie' zhangjie.slug  %}" class="w3-text-pink w3-animate-right">{{zhangjie.zhangjie_title}}</a><span class="w3-right w3-badge w3-green w3-animate-left ">{{zhangjie.question_set.count}}</span></li>
+          {% endfor %}
+        </ul>
+
+</div>
+
+
+{%  endblock %}

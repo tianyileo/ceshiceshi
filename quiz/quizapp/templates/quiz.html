@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Quiz result{% endblock %}
+
+
+{% block content %}
+<hr/>
+<hr/>
+<hr/>
+<hr/>
+<div class="w3-red">
+	<h2>Hi <a href="/p/{{ user }}">{{ user.username }}</a> ,Your quiz result is:{{select_zhangjie}} -----{{ fenshu }}</h2>
+
+	Rght_count：{{ r_count }}个<br/>
+  Wrong_count：{{ w_count  }}个<br/>
+	<a href="/record/">Check</a>
+</div>
+
+	{% if w_count %}
+	<hr/>
+		错误题目：
+		<div class="w3-container w3-blue ">
+		<ol>
+		{% for obj in w_obj_list %}
+			<li>{{ obj }}</li>
+			{% for answer in obj.answer_set.all %}
+			{{answer}}<br>
+			{% endfor %}
+		<div class="r-answer">	<b>The Right Answer ：</b> <br/>{% for r in obj.get_right_answer %} {{ r.title }}<br> {% endfor %}
+			{%  if obj.get_leixing_display == 'SC'  %}
+			<b>Your choice is:</b> <br>{{ user_sc_select}} <br>
+			{%  else %}
+			<b>Your choice is:</b><br>
+				{%  for user_mc_select_x in user_mc_select %}
+						{{ user_mc_select_x}} <br>
+				{% endfor  %}
+			{%  endif %}
+			<b>Explanation：</b> <br/>{{ obj.explanation }}<br/>
+			</div>
+		{% endfor%}
+		</ol>
+		</div>
+	{% endif %}
+
+
+{% endblock %}

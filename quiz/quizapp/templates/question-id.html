@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+This is queation page by id
+{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<br><br>
+<h2 class = 'w3-pink'>ZhangJie   :   <a href="{% url  'show_question_by_zhangjie' question.zhangjie.slug   %}">{{question.zhangjie.zhangjie_title}} </a>  </h2>
+<div class="w3-border w3-green">
+  <span class="w3-badge w3-left">{{question.get_leixing_display  }}</span>
+  {{ question }}
+
+</div>
+<br/>
+{% for answer in question.answer_set.all %}
+{% if question.leixing == 1 %}
+<input type="radio" name="{{ question.id }}" value="{{ answer.id }}">
+{% else %}
+<input type="checkbox" name="{{ question.id }}" value="{{ answer.id }}">
+{% endif %}
+<span class="w3-amber  w3-hover-brown">
+  {{ answer }}
+</span>
+<br/>
+
+{% endfor %}
+<br>
+<a href = {% url 'show_question_by_id' question.id|add:-1  %}><button type="button"  class="w3-button w3-red w3-large" >Previous Question</button> </a>
+<button type="button"  onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-red w3-large ">Show Answer</button>
+<a href = {% url 'show_question_by_id' question.id|add:1  %}><button type="button"  class="w3-button w3-red w3-large " >Next Question</button> </a>
+
+
+<div  id="id01"  class="w3-modal"  >
+      <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:700px">
+          <div class="w3-center"><br>
+            <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+            <div class="w3-pink" >
+              <br><br>
+              <strong>The right answer :</strong><br>
+                              {%  for xx in question.get_right_answer   %}
+                              {{xx}}<br>
+                              {% endfor  %}
+              <strong>Explanation : </strong><br>{{ question.explanation }}
+            </div>
+          </div>
+      </div>
+</div>
+{%  endblock %}

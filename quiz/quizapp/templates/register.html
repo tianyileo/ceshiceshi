@@ -1,0 +1,46 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="{% static 'css\semantic.css' %}" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css\login.css' %}" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <form class="bg" action="{% url 'register' %}" method="POST">
+      <div class="ui image logo">
+                <a href="{% url 'quiz_create' %}">
+                    <img src="{% static 'images/bg-logo.png' %}" alt="" class="ui image" />
+                </a>
+      </div>
+      <div class="ui  two item text  menu">
+        <a class="active item">
+          <span><p class="outset" style="border-bottom: 2px solid #2185D0;">注册</p></span></a>
+        <a class="item" href="{% url 'login' %}">
+          <span><p class="outset" style="border-bottom: 2px solid rgb(247, 250, 252);">登录</p></span></a>
+
+      </div>
+      <div class="ui vertical menu">
+        <div class="item">
+            <div class="ui transparent input">
+                <input type="name" placeholder="姓名" name="name">
+            </div>
+        </div>
+        <div class="item">
+            <div class="ui transparent input">
+              <input type="email" placeholder="邮箱" name="email">
+            </div>
+        </div>
+        <div class="item">
+          <div class="ui transparent input">
+            <input type="password" placeholder="密码（不少于6位）" name="password">
+          </div>
+        </div>
+      </div>
+
+      {% csrf_token %}
+      <button class="ui blue button"> 注册 </button>
+    </form>
+  </body>
+</html>
